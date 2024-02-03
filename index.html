@@ -15,14 +15,14 @@
 	<div id="input-div">
 		<div>
 			<div>
-				<p>Propability:</p><input type="number" id="probability-input" step="0.01"><br>
-				<p>No. of Attempts:</p><input type="number" id="attempts-input"><br>
+				<p>Probability:</p><input type="number" id="probability-input" step="0.01" title="A number between 0 and 1"><br>
+				<p>No. of Attempts:</p><input type="number" id="attempts-input" title="A whole, positive number"><br>
 			</div>
 			<button onclick="showChart(document.getElementById('probability-input').value, document.getElementById('attempts-input').value)">Submit</button>
 		</div>
 		<div>
 			<div>
-				<p>Target (x): </p><input type="number" id="target-input" onblur="showTarget(this.value)"><br>
+				<p>Target (x): </p><input type="number" id="target-input" onblur="showTarget(this.value)" title="Tha target number of successes"><br>
 			</div>
 			<div>
 				<p id="paragraph-x-less">P(X < x): </p>
