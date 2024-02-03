@@ -88,17 +88,10 @@ function showChart (probability, attempts) {
 			datasets: [{
 				label: 'Probability',
 				data: stripped_data.map (item => `${item.value}`),
-				borderColor: 'rgb(75, 192, 192)'
+				backgroundColor: 'rgba(80, 120, 152, 0.8)'
 			}]
 		},
-		options: {
-			maintainAspectRatio: false,
-			plugins: {
-				legend: {
-					display: false
-				}
-			}
-		}
+		options: chart_options
 	});
 }
 
@@ -117,8 +110,39 @@ function showTarget (target) {
 
 	const x_less_text = data.filter (item => item.label < target).map (item => item.value).reduce ((a, b) => a + b, 0);
 	paragraph_x_less.innerText = `P(X < x): ${x_less_text.toFixed (3)}%`;
+
+	chart.data.datasets[0].backgroundColor =
+		bar => chart.data.labels[bar.index] == target ? 'rgba(60, 72, 103, 0.8)' : 'rgba(80, 120, 152, 0.8)';
+	chart.update ();
 }
+
 
 let chart;
 let data;
+
 const ctx = document.getElementById('chart');
+
+const chart_options = {
+	maintainAspectRatio: false,
+	plugins: {
+		legend: {
+			display: false
+		}
+	},
+	scales: {
+		y: {
+			ticks: {
+				callback: value => `${value}%`
+			}
+		},
+		x: {
+			title: {
+				display: true,
+				text: 'No. of Successes',
+				font: {
+					size: 14
+				}
+			}
+		}
+	}
+};
