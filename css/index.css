@@ -1,0 +1,39 @@
+body {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	column-gap: 3vw;
+	background-color: #e7e2e2;
+	height: 90vh;
+	color: #222;
+	font-family: Andale Mono, monospace;
+}
+
+#input-div {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10vh;
+}
+
+#input-div > div {
+	display: flex;
+	flex-direction: column;
+	row-gap: 5vh;
+}
+
+#chart-div {
+	height: 90%;
+	width: 60vw;
+	background-color: #9daad2;
+	padding: 1em;
+	border-radius: 5px;
+}
+
+button {
+	font-family: Andale Mono, monospace;
+	font-weight: bold;
+	padding: 0.4rem 0;
+	color: #222;
+	border-radius: 5px;
+}

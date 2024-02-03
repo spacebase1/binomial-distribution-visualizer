@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta name="description" content="Binomial Distribution Visualizer">
+	<meta name="keywords" content="Probability, Binomial Distribution, Calculator, Mathematics, Statistics">
+	<meta name="viewport" content="width=device-width">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/index.css">
+	<title>Binomial Distribution Visualizer</title>
+</head>
+<body>
+	<div id="chart-div">
+		<canvas id="chart"></canvas>
+	</div>
+	<div id="input-div">
+		<div>
+			<div>
+				<p>Propability: </p><input type="number" id="probability-input" step="0.01"><br>
+				<p>No. of Attempts: </p><input type="number" id="attempts-input"><br>
+			</div>
+			<button onclick="showChart(document.getElementById('probability-input').value, document.getElementById('attempts-input').value)">Submit</button>
+		</div>
+		<div>
+			<div>
+				<p>Target (x): </p><input type="number" id="target-input" onblur="showTarget(this.value)"><br>
+			</div>
+			<div>
+				<p id="paragraph-x-equals">P(X = x): </p>
+				<p id="paragraph-x-more">P(X > x): </p>
+				<p id="paragraph-x-less">P(X < x): </p>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="./scripts/index.js"></script>
+</body>
+</html>
