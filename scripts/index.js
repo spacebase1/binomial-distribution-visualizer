@@ -1,3 +1,38 @@
+let chart;
+let data;
+
+const ctx = document.getElementById('chart');
+const target_input = document.getElementById ('target-input');
+const paragraph_x_equals = document.getElementById ('paragraph-x-equals');
+const paragraph_x_more = document.getElementById ('paragraph-x-more');
+const paragraph_x_less = document.getElementById ('paragraph-x-less');
+
+const chart_options = {
+	maintainAspectRatio: false,
+	plugins: {
+		legend: {
+			display: false
+		}
+	},
+	scales: {
+		y: {
+			ticks: {
+				callback: value => `${value}%`
+			}
+		},
+		x: {
+			title: {
+				display: true,
+				text: 'No. of Successes',
+				font: {
+					size: 14
+				}
+			}
+		}
+	}
+};
+
+
 // Calculates combinations with optimization for large numbers
 function calcCombinations (elements, set_size) {
 	// e2 equals either set_size or (elements - set_size), whichever one is smaller
@@ -93,14 +128,21 @@ function showChart (probability, attempts) {
 		},
 		options: chart_options
 	});
+
+	// Erase target (x) probabilities
+	target_input.value = null;
+	paragraph_x_less.innerText = 'P(X < x):';
+	paragraph_x_equals.innerText = 'P(X = x):';
+	paragraph_x_more.innerText = 'P(X > x):';
+
+
 }
 
 function showTarget (target) {
 	if (!chart) {return}
 
-	const paragraph_x_equals = document.getElementById ('paragraph-x-equals');
-	const paragraph_x_more = document.getElementById ('paragraph-x-more');
-	const paragraph_x_less = document.getElementById ('paragraph-x-less');
+	const x_less_text = data.filter (item => item.label < target).map (item => item.value).reduce ((a, b) => a + b, 0);
+	paragraph_x_less.innerText = `P(X < x): ${x_less_text.toFixed (3)}%`;
 
 	const x_equals_text = data.filter (item => item.label == target).map (item => item.value).reduce ((a, b) => a + b, 0);
 	paragraph_x_equals.innerText = `P(X = x): ${x_equals_text.toFixed (3)}%`;
@@ -108,41 +150,8 @@ function showTarget (target) {
 	const x_more_text = data.filter (item => item.label > target).map (item => item.value).reduce ((a, b) => a + b, 0);
 	paragraph_x_more.innerText = `P(X > x): ${x_more_text.toFixed (3)}%`;
 
-	const x_less_text = data.filter (item => item.label < target).map (item => item.value).reduce ((a, b) => a + b, 0);
-	paragraph_x_less.innerText = `P(X < x): ${x_less_text.toFixed (3)}%`;
-
+	// Highlight the target bar
 	chart.data.datasets[0].backgroundColor =
 		bar => chart.data.labels[bar.index] == target ? 'rgba(60, 72, 103, 0.8)' : 'rgba(80, 120, 152, 0.8)';
 	chart.update ();
 }
-
-
-let chart;
-let data;
-
-const ctx = document.getElementById('chart');
-
-const chart_options = {
-	maintainAspectRatio: false,
-	plugins: {
-		legend: {
-			display: false
-		}
-	},
-	scales: {
-		y: {
-			ticks: {
-				callback: value => `${value}%`
-			}
-		},
-		x: {
-			title: {
-				display: true,
-				text: 'No. of Successes',
-				font: {
-					size: 14
-				}
-			}
-		}
-	}
-};
