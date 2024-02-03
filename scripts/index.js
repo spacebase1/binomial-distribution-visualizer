@@ -105,6 +105,8 @@ function getData (probability, attempts) {
 }
 
 function showChart (probability, attempts) {
+	if (probability == '' || attempts == '') {return}
+
 	// Clear the chart
 	if (chart) {chart.destroy ();}
 
@@ -134,8 +136,6 @@ function showChart (probability, attempts) {
 	paragraph_x_less.innerText = 'P(X < x):';
 	paragraph_x_equals.innerText = 'P(X = x):';
 	paragraph_x_more.innerText = 'P(X > x):';
-
-
 }
 
 function showTarget (target) {
@@ -154,4 +154,14 @@ function showTarget (target) {
 	chart.data.datasets[0].backgroundColor =
 		bar => chart.data.labels[bar.index] == target ? 'rgba(60, 72, 103, 0.8)' : 'rgba(90, 120, 162, 0.8)';
 	chart.update ();
+}
+
+document.onkeyup = (e) => {
+	let event = (e || window.event);
+	if (event.code == "Enter") {
+		document.querySelectorAll("button").forEach (item => {
+			item.addEventListener('focus', (e) => e.target.blur ())
+		});
+		showChart (document.getElementById('probability-input').value, document.getElementById('attempts-input').value);
+	}
 }
