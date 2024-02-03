@@ -19,7 +19,10 @@ body {
 #input-div > div {
 	display: flex;
 	flex-direction: column;
-	row-gap: 5vh;
+	row-gap: 3vh;
+	background-color: #dcd9df;
+	padding: 1em;
+	border-radius: 5px;
 }
 
 #chart-div {
@@ -36,4 +39,5 @@ button {
 	padding: 0.4rem 0;
 	color: #222;
 	border-radius: 5px;
+	margin-top: 2vh;
 }

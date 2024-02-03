@@ -123,7 +123,7 @@ function showChart (probability, attempts) {
 			datasets: [{
 				label: 'Probability',
 				data: stripped_data.map (item => `${item.value}`),
-				backgroundColor: 'rgba(80, 120, 152, 0.8)'
+				backgroundColor: 'rgba(90, 120, 162, 0.8)'
 			}]
 		},
 		options: chart_options
@@ -152,6 +152,6 @@ function showTarget (target) {
 
 	// Highlight the target bar
 	chart.data.datasets[0].backgroundColor =
-		bar => chart.data.labels[bar.index] == target ? 'rgba(60, 72, 103, 0.8)' : 'rgba(80, 120, 152, 0.8)';
+		bar => chart.data.labels[bar.index] == target ? 'rgba(60, 72, 103, 0.8)' : 'rgba(90, 120, 162, 0.8)';
 	chart.update ();
 }
