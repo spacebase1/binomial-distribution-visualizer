@@ -97,7 +97,7 @@ function getData (probability, attempts) {
 	
 		data[i] = {
 			label: i,
-			value: safeMultiply ([combinations, 1], [probability, i], [(1 - probability), (attempts - i)], [100, 1])
+			value: safeMultiply ([combinations, 1], [probability, i], [(1 - probability), (attempts - i)]) * 100
 		}
 	}
 
@@ -131,7 +131,7 @@ function showChart (probability, attempts) {
 		options: chart_options
 	});
 
-	// Erase target (x) probabilities
+	// Erase target (x) text
 	target_input.value = null;
 	paragraph_x_less.innerText = 'P(X < x):';
 	paragraph_x_equals.innerText = 'P(X = x):';
@@ -139,7 +139,12 @@ function showChart (probability, attempts) {
 }
 
 function showTarget (target) {
-	if (!chart) {return}
+	if (!chart || target == '') {return}
+	if (target < 0 || target >= data.length) {
+		// todo
+		alert ("Invalid ");
+		return;
+	}
 
 	const x_less_text = data.filter (item => item.label < target).map (item => item.value).reduce ((a, b) => a + b, 0);
 	paragraph_x_less.innerText = `P(X < x): ${x_less_text.toFixed (3)}%`;
